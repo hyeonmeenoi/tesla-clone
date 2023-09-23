@@ -1,6 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 import { information } from "./Home";
+import { Fade } from "react-awesome-reveal";
 
 function Section({
   title,
@@ -10,20 +10,26 @@ function Section({
   leftBtnText,
 }: information) {
   return (
-    <Wrap bgImage={image}>
-      <ItemText>
-        <h1>{title}</h1>
-        <p>{description}</p>
-      </ItemText>
+    <Wrap bgimage={image}>
+      <Fade direction="up">
+        <ItemText>
+          <h1>{title}</h1>
+          <p>{description}</p>
+        </ItemText>
+      </Fade>
       <Buttons>
-        <ButtonGroup>
-          <LeftButton>{leftBtnText ? leftBtnText : "Custom Order"}</LeftButton>
-          {rightBtnText === "no" ? null : (
-            <RightButton>
-              {rightBtnText ? rightBtnText : "Existing Inventory"}
-            </RightButton>
-          )}
-        </ButtonGroup>
+        <Fade direction="up">
+          <ButtonGroup>
+            <LeftButton>
+              {leftBtnText ? leftBtnText : "Custom Order"}
+            </LeftButton>
+            {rightBtnText === "no" ? null : (
+              <RightButton>
+                {rightBtnText ? rightBtnText : "Existing Inventory"}
+              </RightButton>
+            )}
+          </ButtonGroup>
+        </Fade>
         <DownArrow src="images/down-arrow.svg" />
       </Buttons>
     </Wrap>
@@ -32,13 +38,14 @@ function Section({
 
 export default Section;
 
-const Wrap = styled.div<{ bgImage: string }>`
+const Wrap = styled.div<{ bgimage: string }>`
+  z-index: 10;
   width: 100vw;
   height: 100vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: ${(props) => `url("/public/images/${props.bgImage}")`};
+  background-image: ${(props) => `url("/images/${props.bgimage}")`};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
